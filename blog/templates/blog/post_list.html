@@ -1,14 +1,13 @@
-<html>
-<head>
-  <title>Django Girls Blog</title>
-</head>
-        <body>
-          <h1><a href="/">Список постов</a></h1>
-        {% for post in posts %}
-        <div>
-          <p>published:{{ post.published_date}}</p>
-          <h2><a href="">{{post.title}}</a></h2>
-          <p>{{ post.text}}</p>
-        {% endfor %}
-    </body>
-</html>
+{% extends 'blog/base.html' %}
+{% block content %}
+{% for post in posts %}
+<div class="post">
+  <div class="date">
+    Опубликовано:
+    {{ post.published_date }}
+  </div>
+  <h1><a href="">{{ post.title }}</a></h1>
+  <p>{{ post.text|linebreaksbr }}</p>
+</div>
+{% endfor %}
+{% endblock %}
