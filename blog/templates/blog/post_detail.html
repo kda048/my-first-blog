@@ -1,6 +1,5 @@
 {% extends 'blog/base.html' %}
+
 {% block content %}
-{% for post in posts %}
 {% include 'blog/post.html' with post=post%}
-{% endfor %}
 {% endblock %}
