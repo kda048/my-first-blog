@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-$8(fo62sh^hkhpqk*7foyy4c_22n4ih^!^*e#)498&%*a4_nc1
 DEBUG = True
 
 ALLOWED_HOSTS = []
+LOGIN_REDIRECT_URL = '/'
 
 
 # Application definition
@@ -51,6 +52,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mysite.urls'
+
 
 TEMPLATES = [
     {
