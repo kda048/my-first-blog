@@ -1,6 +1,6 @@
 {% extends 'blog/base.html' %}
-
 {% block content %}
+
   {% if form.errors %}
     <div class="alert alert-danger">
       Неверное имя пользователя или пароль
@@ -37,4 +37,5 @@
     <input type="submit" value="Войти" class="btn btn-primary">
     <input type="hidden" name="next" value="{{next}}">
   </form>
+  НИЯУ МИФИ · © 2022
 {% endblock%}
