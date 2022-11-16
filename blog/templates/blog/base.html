@@ -1,9 +1,7 @@
-{% load static %}
-
+ {% load static %}
 <html>
-<head>
-  <title>Django Girls Blog</title>
-
+  <head>
+    <title>Django Girls Blog</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -13,33 +11,50 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
 </head>
 <body>
-  
-  <div class="col-lg-8 mx-auto p-4 py-md-5">
-     <nav class ="navbar navbar-expand-lg navbar-lg navbar-light bg-light ">
-      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-        <a class="navbar-brand" href="/">Мой блог</a>            
-      </a>
-      <a href="{%url 'post_new'%}"> <i class="bi-plus"></i></a>
-        {%if user.get_username %} 
-          <spanclass>{{user.get_username}}</spanclass>
+
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="/">My blog</a>
+    {%if user.get_username %} 
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a href="{%url 'post_new'%}"><h class="bi-plus">Добавить пост</h></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto " >
+        <spanclass class="ms-2">{{user.get_username}}</spanclass>
+        </li>
+        <li class="nav-item">
           <a href="{%url 'logout'%}" class="ms-2">Выход</a>
+        </li>
         {%else%}
+        </li>
+        <li class="nav-item">
           <a href="{%url 'login'%}" class="ms-2">Вход</a>
+        </li>
         {%endif%}
+      </ul>
+      
+    </div>
+  </div>
 
-    </nav>
-    
-
- <main>
+</a>
+</nav>
+<main>
 {% block content %}
 {%endblock%}
- </main>
+</main>
 {% block footer %}
 {% endblock %}
 </div>    
 </body>
 
 </html>
+
 
 
 
