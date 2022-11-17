@@ -11,15 +11,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
 </head>
 <body>
-
+<div class="col-lg-8 mx-auto p-4 py-md-5">
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container">
-    <a class="navbar-brand" href="/">My blog</a>
-    {%if user.get_username %} 
+    <a class="navbar-brand" href="/">Мой блог</a>
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {%if user.get_username %} 
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a href="{%url 'post_new'%}"><h class="bi-plus">Добавить пост</h></a>
@@ -27,15 +28,16 @@
       </ul>
       <ul class="navbar-nav ms-auto " >
         <spanclass class="ms-2">{{user.get_username}}</spanclass>
-        </li>
         <li class="nav-item">
-          <a href="{%url 'logout'%}" class="ms-2">Выход</a>
+          <h5><a href="{%url 'logout'%}" class="ms-2">Выход</a></h5>
         </li>
+      </ul>
         {%else%}
-        </li>
+        <ul class="navbar-nav ms-auto " >
         <li class="nav-item">
           <a href="{%url 'login'%}" class="ms-2">Вход</a>
         </li>
+      </ul>
         {%endif%}
       </ul>
       
@@ -50,9 +52,9 @@
 </main>
 {% block footer %}
 {% endblock %}
-</div>    
+</div> 
 </body>
-
+</div>
 </html>
 
 
