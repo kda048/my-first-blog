@@ -17,7 +17,6 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container">
     <a class="navbar-brand" href="/">Мой блог</a>
-  
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,8 +25,8 @@
       <ul class="navbar-nav w-100">
         <li class="nav-item">
             <a class="nav-link" href="/post/new/">
-                <i class="bi-plus-lg"></i>
-                Добавить пост
+                <i class="bi-plus-lg"> Добавить пост</i>
+
             </a>
         </li>
     </ul>
@@ -42,7 +41,7 @@
         {%else%}
         <ul class="navbar-nav ms-auto " >
         <li class="nav-item">
-          <a href="{%url 'login'%}" class="nav-link">Войти</a>
+          <h5 href="{%url 'login'%}" class="nav-link">Войти</h5>
         </li>
       </ul>
         {%endif%}
@@ -66,8 +65,3 @@
 </body>
 </div>
 </html>
-
-
-
-
-

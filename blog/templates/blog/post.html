@@ -5,10 +5,12 @@
   <div class="card-body">
      
     <p class="card-text">{{ post.text|linebreaksbr }}</p>
+    <p>Автор поста: {{post.author.username}} </p>
     {%if user.get_username %}
     <a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}">
     <button type="submit" class="btn btn-primary">Редактировать <i class="bi bi-brush"></i></button>
     </a>
+  
     {%endif%}
   </div>
   <div class="card-footer text-muted">

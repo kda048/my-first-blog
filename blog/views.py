@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Post
@@ -42,6 +43,3 @@ def post_edit(request, pk):
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
-
-
-
