@@ -1,10 +1,13 @@
 
 from django.shortcuts import render
 from django.utils import timezone
-from .models import Post
+from .models import Post, Comment
 from django.shortcuts import render, get_object_or_404
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from django.shortcuts import redirect
+from django.core.exceptions import PermissionDenied
+from django.views.generic.edit import DeleteView
+from django.urls import reverse_lazy
 
 # Create your views here.
 def post_list(request):
@@ -16,7 +19,8 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    return render(request, 'blog/post_detail.html', {'post': post})
+    comments = post.comment_set.all()
+    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments})
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -29,7 +33,7 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
-    
+
 def post_edit(request, pk):
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
@@ -42,4 +46,41 @@ def post_edit(request, pk):
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
-    return render(request, 'blog/post_edit.html', {'form': form})
+    return render(request, 'blog/post_edit.html', {'form': form})    
+
+def comment_new(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    post = get_object_or_404(Post, pk=pk)    
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', pk = post.pk)
+    else:        
+        form = CommentForm()
+    return render(request, 'blog/comment_new.html', {'form': form})
+
+def comment_edit(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if not request.user.is_authenticated:
+        return redirect('login')
+    if request.user != comment.author:
+        raise PermissionDenied
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save()
+            return redirect('post_detail', pk=comment.post.pk)
+    else:
+        form = CommentForm(instance=comment)
+    return render(request, 'blog/comment_edit.html', {'form': form})
+
+class CommentDelete(DeleteView):
+    model = Comment
+
+    def get_success_url(self):
+        return reverse_lazy('post_detail', kwargs={'pk': self.object.post.pk})

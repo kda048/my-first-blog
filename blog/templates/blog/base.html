@@ -35,13 +35,13 @@
           <h5 class="navbar-text">{{user.get_username}}</h5>
         </li>
         <li class="nav-item">
-          <h5><a href="{%url 'logout'%}" class="nav-link">Выйти</a></h5>
+          <a href="{%url 'logout'%}" class="nav-link">Выйти</a>
         </li>
       </ul>
         {%else%}
         <ul class="navbar-nav ms-auto " >
         <li class="nav-item">
-          <h5 href="{%url 'login'%}" class="nav-link">Войти</h5>
+          <a href="{%url 'login'%}" class="nav-link">Войти</a>
         </li>
       </ul>
         {%endif%}
